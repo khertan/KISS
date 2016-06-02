@@ -4,21 +4,35 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
+    <TextView
+            android:id="@+id/todoText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Todos"
+            android:layout_marginTop="10dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?attr/resultColor"/>
+ 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/todoText"
         android:layout_above="@+id/searchEditLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:background="?attr/listBackgroundColor"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:elevation="2dp">
 
         <fr.neamar.kiss.ui.BlockableListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/todoText"
             android:cacheColorHint="@android:color/transparent"
             android:divider="?attr/dividerDrawable"
             android:dividerHeight="1dp"
@@ -27,11 +41,14 @@
             android:layout_gravity="top|center_horizontal">
         </fr.neamar.kiss.ui.BlockableListView>
 
+
         <fr.neamar.kiss.ui.BottomPullEffectView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/listEdgeEffect"
             android:layout_gravity="center_horizontal|bottom" />
+    
+
 
     </FrameLayout>
 
@@ -59,7 +76,7 @@
             android:onClick="onLauncherButtonClicked"
             android:paddingLeft="6dp"
             android:paddingRight="10dp"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/ic_launcher_white"
             android:tag="showMenu"/>
 
         <ProgressBar

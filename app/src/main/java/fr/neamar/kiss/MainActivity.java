@@ -38,6 +38,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
+import android.os.Environment;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import java.util.ArrayList;
 
@@ -342,6 +349,9 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
             overridePendingTransition(0, 0);
         }
 
+        // TODO LOADING
+        readTodos();
+        
         if (kissBar.getVisibility() != View.VISIBLE) {
             updateRecords(searchEditText.getText().toString());
             displayClearOnInput();
@@ -369,6 +379,58 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
         }
 
         super.onResume();
+    }
+
+    protected void readTodos() {
+         //Find the view by its id  
+        TextView tv = (TextView)findViewById(R.id.todoText);  
+
+        File dir = Environment.getExternalStorageDirectory();  
+        //File yourFile = new File(dir, "path/to/the/file/inside/the/sdcard.ext");  
+
+        //Get the text file  
+        File file = new File(dir,"writeily/Todos.md");  
+        // i have kept text.txt in the sd-card  
+
+        if(file.exists())   // check if file exist  
+        {  
+              //Read text from file  
+            StringBuilder text = new StringBuilder();  
+
+            try {  
+                BufferedReader br = new BufferedReader(new FileReader(file));  
+                String line;  
+                Boolean now = false;
+                Boolean first = true;
+                text.append("Todos\n");
+                while ((line = br.readLine()) != null) { 
+                    if (line.toLowerCase().startsWith("#") && now)
+                        now = false;
+                    else if (line.toLowerCase().startsWith("#todos"))
+                        now = true;
+                    else if ((line != "\n") 
+                            && (line != "\r\n") 
+                            && (line != "\r") 
+                            && (line.replaceAll("\\r|\\n", "") != ""))
+                        if (now) {
+                            if (!first)
+                                text.append('\n');
+                            text.append(line);
+                            first = false;
+                        }
+                }  
+            }  
+            catch (IOException e) {  
+                //You'll need to add proper error handling here  
+            }  
+            //Set the text  
+            tv.setText(text);  
+        }  
+        else  
+        {  
+            tv.setText("No todos found");  
+        }  
+
     }
 
     @Override

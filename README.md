@@ -1,5 +1,8 @@
 KISS
 ======
+This is not the official KISS, but a temporary fork to experiment some changes
+like Putting icon on right, and displaying a TODOS list from a markdown file.
+
 KISS is a *blazingly* fast launcher for android requiring nearly no memory to run.
 
 [![F-Droid](https://f-droid.org/wiki/images/0/06/F-Droid-button_get-it-on.png)](https://f-droid.org/repository/browse/?fdid=fr.neamar.kiss)

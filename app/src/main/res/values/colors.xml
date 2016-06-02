@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="kiss_green">#4caf50</color>
-    <color name="kiss_green_dark">#388E3C</color>
+    <color name="kiss_green">#4c50af</color>
+    <color name="kiss_green_">#4caf50</color>
+    <color name="kiss_green_dark">#383C8E</color>
+    <color name="kiss_green_dark_">#388E3C</color>
     <color name="kiss_text_dark">#b3b3b3</color>
     <color name="kiss_background">#eaeaea</color>
     <color name="kiss_divider_light">#e0e0e0</color>
@@ -9,5 +11,6 @@
     <color name="kiss_divider_dark">#434343</color>
     <color name="kiss_background_light_transparent">#88FFFFFF</color>
     <color name="kiss_background_dark_transparent">#88222222</color>
-    <color name="kiss_green_semitransparent">#884caf50</color>
+    <color name="kiss_green_semitransparent">#88af4c50</color>
+    <color name="kiss_green_semitransparent_">#884caf50</color>
 </resources>

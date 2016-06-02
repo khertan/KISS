@@ -9,17 +9,6 @@
     android:paddingRight="@dimen/result_margin_right"
     android:paddingTop="@dimen/result_margin_top">
 
-    <ImageView
-        android:id="@+id/item_shortcut_icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="@dimen/icon_margin_bottom"
-        android:layout_marginLeft="@dimen/icon_margin_left"
-        android:layout_marginRight="@dimen/icon_margin_right"
-        android:layout_marginTop="@dimen/icon_margin_top"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_launcher"/>
-
     <TextView
         android:id="@+id/item_app_name"
         android:layout_width="wrap_content"
@@ -33,7 +22,7 @@
         android:layout_toRightOf="@+id/item_shortcut_icon"
         android:gravity="center_vertical"
         android:layout_alignBottom="@+id/item_shortcut_icon"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true" />
 
     <ImageView
@@ -45,7 +34,19 @@
         android:src="@drawable/ic_launcher"
         android:contentDescription="@null"
         android:layout_alignBottom="@+id/item_shortcut_icon"
-        android:layout_alignRight="@+id/item_shortcut_icon"
+        android:layout_alignLeft="@+id/item_shortcut_icon"
         android:layout_alignEnd="@+id/item_shortcut_icon" />
+
+    <ImageView
+        android:id="@+id/item_shortcut_icon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="@dimen/icon_margin_bottom"
+        android:layout_marginLeft="@dimen/icon_margin_left"
+        android:layout_marginRight="@dimen/icon_margin_right"
+        android:layout_marginTop="@dimen/icon_margin_top"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_launcher"/>
+
 
 </RelativeLayout>
