@@ -68,7 +68,7 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
     public static final String FULL_LOAD_OVER = "fr.neamar.summon.FULL_LOAD_OVER";
 
     /**
-     * IDS for the favorites buttons
+     * IDs for the favorites buttons
      */
     private final int[] favsIds = new int[]{R.id.favorite0, R.id.favorite1, R.id.favorite2, R.id.favorite3};
 
@@ -166,6 +166,9 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
                 if (intent.getAction().equalsIgnoreCase(LOAD_OVER)) {
                     updateRecords(searchEditText.getText().toString());
                 } else if (intent.getAction().equalsIgnoreCase(FULL_LOAD_OVER)) {
+                    // Run GC once to free all the garbage accumulated during provider initialization
+                    System.gc();
+
                     displayLoader(false);
 
                 } else if (intent.getAction().equalsIgnoreCase(START_LOAD)) {
@@ -669,6 +672,11 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
                 kissBar.setVisibility(View.GONE);
             }
             searchEditText.setText("");
+
+            if (prefs.getBoolean("display-keyboard", false)) {
+                // Display keyboard
+                showKeyboard();
+            }
         }
     }
 
@@ -677,8 +685,13 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
                 .getFavorites(tryToRetrieve);
 
         if (favoritesPojo.size() == 0) {
-            Toast toast = Toast.makeText(MainActivity.this, getString(R.string.no_favorites), Toast.LENGTH_SHORT);
-            toast.show();
+            int noFavCnt = prefs.getInt("no-favorites-tip", 0);
+            if (noFavCnt<3) {
+                Toast toast = Toast.makeText(MainActivity.this, getString(R.string.no_favorites), Toast.LENGTH_SHORT);
+                toast.show();
+                prefs.edit().putInt("no-favorites-tip", ++noFavCnt).commit();
+
+            }
         }
 
         // Don't look for items after favIds length, we won't be able to display them
@@ -714,11 +727,13 @@ public class MainActivity extends Activity implements QueryInterface, KeyboardSc
 
         if (query.length() == 0) {
             if (prefs.getBoolean("history-hide", false)) {
+                searchEditText.setHint("");
                 searcher = new NullSearcher(this);
                 //Hide default scrollview
                 findViewById(R.id.main_empty).setVisibility(View.INVISIBLE);
 
             } else {
+                searchEditText.setHint(R.string.ui_search_hint);
                 searcher = new HistorySearcher(this);
                 //Show default scrollview
                 findViewById(R.id.main_empty).setVisibility(View.VISIBLE);
